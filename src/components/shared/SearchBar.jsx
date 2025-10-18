@@ -120,7 +120,7 @@ export default function SearchBar() {
         >
           {/* Location Section */}
           <div className="flex-1 w-full cursor-pointer rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200">
-            <label htmlFor="location" className="block text-xs font-bold text-gray-700">Hotel</label>
+            <label htmlFor="location" className="block text-xs font-bold text-gray-700">Destination</label>
             <input
               type="text" id="location" value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -134,10 +134,10 @@ export default function SearchBar() {
 
           {/* Date Section */}
           <div className="flex-1 w-full cursor-pointer rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200">
-            <label htmlFor="date" className="block text-xs font-bold text-gray-700">Check-in/out</label>
+            <label htmlFor="date" className="block text-xs font-bold text-gray-700">Date</label>
             <input
               type={inputType} id="date" value={date}
-              placeholder="Select dates" onFocus={handleDateFocus}
+              placeholder="Select trip start date" onFocus={handleDateFocus}
               onBlur={handleDateBlur} onChange={(e) => setDate(e.target.value)}
               className="w-full bg-transparent focus:outline-none text-sm placeholder-gray-500 text-gray-900"
               required
