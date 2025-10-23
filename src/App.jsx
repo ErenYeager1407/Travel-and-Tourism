@@ -11,9 +11,11 @@ import Contact from "./pages/Contacts";
 import Profile from "./pages/Profile";
 import Deals from "./pages/Deals";
 import Blog from "./pages/Blogs"
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 // Router Configuration
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
       { path: "profile", element: <Profile /> },
       { path: "deals", element: <Deals /> },
       { path: "blog", element: <Blog /> },
+      { path: "signup", element: <Signup /> },
+      { path: "login", element: <Login /> },
     ],
   },
 ]);
