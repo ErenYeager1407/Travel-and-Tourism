@@ -10,7 +10,7 @@ export default function RootLayout() {
 
   const checkUserSession = useCallback(async () => {
     try {
-      const currentUser = await getCurrentUser();
+      const currentUser = await getCurrentUser() ;
       setAuthUser(currentUser); // triggers Header re-render
     } catch (error) {
       setAuthUser(null);
