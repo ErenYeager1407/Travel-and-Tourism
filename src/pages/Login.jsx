@@ -1,16 +1,21 @@
 import { useState } from "react";
-import { loginUser } from "../lib/appwrite";
+import { loginUser, getCurrentUser } from "../lib/appwrite";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { setAuthUser } = useOutletContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await loginUser(email, password);
-      alert("Login successful!");
+      const user = await getCurrentUser();
+      setAuthUser(user);
+      navigate("/"); // redirect to home
     } catch (err) {
       setError(err.message);
     }

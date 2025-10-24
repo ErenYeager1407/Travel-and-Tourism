@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { registerUser } from "../lib/appwrite";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // <-- add this
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await registerUser(email, password, name);
-      alert("Account created successfully! You can now log in.");
+      alert("Account created successfully! Please log in.");
+      navigate("/login");
     } catch (err) {
       setError(err.message);
     }
@@ -29,20 +32,20 @@ export default function Signup() {
         <input
           type="text"
           placeholder="Name"
-          className="w-full p-2 border mb-3 rounded text-black text-xl"
+          className="w-full p-2 border mb-3 rounded text-black"
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-2 border mb-3 rounded text-black text-xl"
+          className="w-full p-2 border mb-3 rounded text-black"
           onChange={(e) => setEmail(e.target.value)}
         />
         <div className="mb-3">
           <input
-            type={showPassword ? "text" : "password"} // uses showPassword state
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
-            className="w-full p-2 border rounded text-black text-xl"
+            className="w-full p-2 border rounded text-black"
             onChange={(e) => setPassword(e.target.value)}
           />
           <label className="flex items-center space-x-2 mt-1 text-sm text-gray-600">

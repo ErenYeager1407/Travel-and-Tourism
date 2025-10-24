@@ -1,8 +1,8 @@
 import { Client, Account } from "appwrite";
 
 const client = new Client()
-  .setEndpoint("https://fra.cloud.appwrite.io/v1") // Appwrite Cloud endpoint
-  .setProject("68fa568f000731c0c00b"); // Replace with your Project ID
+  .setEndpoint("https://fra.cloud.appwrite.io/v1")
+  .setProject("68fa568f000731c0c00b");
 
 export const account = new Account(client);
 export const registerUser = async (email, password, name) => {
