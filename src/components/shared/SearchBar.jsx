@@ -120,7 +120,7 @@ export default function SearchBar() {
         >
           {/* Location Section */}
           <div className="flex-1 w-full cursor-pointer rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200">
-            <label htmlFor="location" className="block text-xs font-bold text-gray-700">Destination</label>
+            <label htmlFor="location" className="block text-xs font-bold text-gray-800">Destination</label>
             <input
               type="text" id="location" value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -134,7 +134,7 @@ export default function SearchBar() {
 
           {/* Date Section */}
           <div className="flex-1 w-full cursor-pointer rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200">
-            <label htmlFor="date" className="block text-xs font-bold text-gray-700">Date</label>
+            <label htmlFor="date" className="block text-xs font-bold text-gray-800">Date</label>
             <input
               type={inputType} id="date" value={date}
               placeholder="Select trip start date" onFocus={handleDateFocus}
@@ -149,7 +149,7 @@ export default function SearchBar() {
           {/* Guests & Search Button Section */}
           <div className="relative flex-1 w-full flex items-center justify-between rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200" ref={popupRef}>
             <div onClick={() => setIsGuestPopupOpen(!isGuestPopupOpen)} className="w-full cursor-pointer">
-              <p className="block text-xs font-bold text-gray-700">Guests & Rooms</p>
+              <p className="block text-xs font-bold text-gray-800">Guests & Rooms</p>
               <p className="text-sm text-gray-500 font-semibold">{`${guests} Guests, ${rooms} Room${rooms > 1 ? "s" : ""}`}</p>
             </div>
             

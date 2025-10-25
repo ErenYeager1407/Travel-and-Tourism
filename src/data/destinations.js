@@ -7,20 +7,20 @@ export const indianDestinationsData = [
     description:
       "Witness the timeless beauty of the ivory-white marble mausoleum, a symbol of eternal love.",
     rating: 5,
-    price: 150,
+    price: 15000,
     flights: [
-      { airline: "IndiGo", price: 120 },
-      { airline: "Vistara", price: 150 },
-      { airline: "Air India", price: 135 },
+      { airline: "IndiGo", price: 5000 },
+      { airline: "Vistara", price: 6500 },
+      { airline: "Air India", price: 7350 },
     ],
     hotels: [
-      { name: "The Oberoi Amarvilas", rating: 5, price: 450 },
-      { name: "Trident Agra", rating: 4, price: 250 },
-      { name: "Hotel Taj Resorts", rating: 3, price: 150 },
+      { name: "The Oberoi Amarvilas", rating: 5, price: 4500 },
+      { name: "Trident Agra", rating: 4, price: 2500 },
+      { name: "Hotel Taj Resorts", rating: 3, price: 1500 },
     ],
     cabs: [
-      { type: "Sedan (Full Day)", price: 40 },
-      { type: "SUV (Full Day)", price: 60 },
+      { type: "Sedan (Full Day)", price: 4000 },
+      { type: "SUV (Full Day)", price: 6000 },
     ],
   },
   {
@@ -31,16 +31,16 @@ export const indianDestinationsData = [
     description:
       "Cruise through the serene network of lakes, canals, and lagoons on a traditional houseboat.",
     rating: 5,
-    price: 220,
+    price: 22000,
     flights: [
-      { airline: "SpiceJet", price: 180 },
-      { airline: "Vistara", price: 210 },
+      { airline: "SpiceJet", price: 18000 },
+      { airline: "Vistara", price: 21000 },
     ],
     hotels: [
-      { name: "Marari Beach Resort", rating: 5, price: 380 },
-      { name: "Punnamada Resort", rating: 4, price: 220 },
+      { name: "Marari Beach Resort", rating: 5, price: 38000 },
+      { name: "Punnamada Resort", rating: 4, price: 22000 },
     ],
-    cabs: [{ type: "Local Taxi (8 hours)", price: 50 }],
+    cabs: [{ type: "Local Taxi (8 hours)", price: 5000 }],
   },
   {
     imageUrl:
@@ -50,18 +50,18 @@ export const indianDestinationsData = [
     description:
       'Explore the "Pink City" and its majestic palaces, vibrant markets, and rich history.',
     rating: 4,
-    price: 180,
+    price: 18000,
     flights: [
-      { airline: "IndiGo", price: 90 },
-      { airline: "AirAsia", price: 85 },
+      { airline: "IndiGo", price: 9000 },
+      { airline: "AirAsia", price: 8500 },
     ],
     hotels: [
-      { name: "Rambagh Palace", rating: 5, price: 600 },
-      { name: "Samode Haveli", rating: 4, price: 300 },
+      { name: "Rambagh Palace", rating: 5, price: 60000 },
+      { name: "Samode Haveli", rating: 4, price: 30000 },
     ],
     cabs: [
-      { type: "Auto Rickshaw Tour", price: 25 },
-      { type: "Private Car (Full Day)", price: 55 },
+      { type: "Auto Rickshaw Tour", price: 2500 },
+      { type: "Private Car (Full Day)", price: 5500 },
     ],
   },
   {
@@ -72,20 +72,20 @@ export const indianDestinationsData = [
     description:
       "Relax on sun-kissed beaches, enjoy vibrant nightlife, and savor delicious seafood.",
     rating: 4,
-    price: 250,
+    price: 25000,
     flights: [
-      { airline: "IndiGo", price: 110 },
-      { airline: "Vistara", price: 140 },
-      { airline: "GoFirst", price: 100 },
+      { airline: "IndiGo", price: 11000 },
+      { airline: "Vistara", price: 14000 },
+      { airline: "GoFirst", price: 10000 },
     ],
     hotels: [
-      { name: "Taj Fort Aguada", rating: 5, price: 400 },
-      { name: "W Goa", rating: 5, price: 550 },
-      { name: "Calangute Residency", rating: 3, price: 120 },
+      { name: "Taj Fort Aguada", rating: 5, price: 40000 },
+      { name: "W Goa", rating: 5, price: 55000 },
+      { name: "Calangute Residency", rating: 3, price: 12000 },
     ],
     cabs: [
-      { type: "Scooter Rental (Per Day)", price: 15 },
-      { type: "Jeep Rental (Per Day)", price: 45 },
+      { type: "Scooter Rental (Per Day)", price: 1500 },
+      { type: "Jeep Rental (Per Day)", price: 4500 },
     ],
   },
   {
@@ -96,7 +96,7 @@ export const indianDestinationsData = [
     description:
       "Experience the spiritual heart of India along the sacred ghats of the ancient city.",
     rating: 4,
-    price: 130,
+    price: 13000,
     flights: [],
     hotels: [],
     cabs: [],
@@ -109,7 +109,7 @@ export const indianDestinationsData = [
     description:
       "Experience the spiritual heart of India along the sacred ghats of the ancient city.",
     rating: 4,
-    price: 130,
+    price: 13000,
     flights: [],
     hotels: [],
     cabs: [],
