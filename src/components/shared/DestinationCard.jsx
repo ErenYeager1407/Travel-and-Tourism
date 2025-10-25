@@ -13,12 +13,12 @@ function DestinationCard({ destination, onCardClick }) {
           className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div className="absolute top-0 right-0 bg-accent text-white p-2 rounded-bl-lg font-bold">
-          ${destination.price}
+          ₹{destination.price}
         </div>
       </div>
       <div className="p-5">
-        <h3 className="text-xl font-bold text-primary">{destination.title}</h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+        <h3 className="text-xl font-bold text-primary text-white">{destination.title}</h3>
+        <p className="text-sm dark:text-gray-500 mb-2">
           {destination.location}
         </p>
         <p className="text-dark dark:text-gray-300 text-sm mb-4 h-10">
@@ -33,7 +33,7 @@ function DestinationCard({ destination, onCardClick }) {
               ({destination.rating}.0)
             </span>
           </div>
-          <span className="text-primary font-semibold hover:underline">
+          <span className="text-primary font-semibold hover:underline text-gray-400">
             View Options →
           </span>
         </div>

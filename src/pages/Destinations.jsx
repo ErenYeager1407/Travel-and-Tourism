@@ -13,7 +13,7 @@ export default function Destinations() {
   return (
     <div className="py-16 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-6">
-        <h1 className="text-4xl font-bold text-center text-primary mb-4">
+        <h1 className="text-4xl font-bold text-center text-primary mb-4 text-white">
           Discover India
         </h1>
         <p className="text-center text-gray-600 dark:text-gray-400 mb-12">

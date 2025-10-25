@@ -14,7 +14,7 @@ function DetailsModal({ destination, onClose }) {
       >
         <div className="sticky top-0 bg-gray-800 p-4 border-b border-gray-700 flex justify-between items-center z-10">
           <div>
-            <h2 className="text-2xl font-bold text-primary">
+            <h2 className="text-2xl font-bold text-primary text-white">
               {destination.title}
             </h2>
             <p className="text-gray-400">{destination.location}</p>
@@ -36,7 +36,7 @@ function DetailsModal({ destination, onClose }) {
                 {destination.flights.map((flight, index) => (
                   <li key={index} className="py-2 flex justify-between items-center">
                     <span className="text-gray-300">{flight.airline}</span>
-                    <span className="font-bold text-accent">${flight.price}</span>
+                    <span className="font-bold text-accent text-white">₹{flight.price}</span>
                   </li>
                 ))}
               </ul>
@@ -61,9 +61,9 @@ function DetailsModal({ destination, onClose }) {
                         </span>
                       </div>
                     </div>
-                    <span className="font-bold text-accent">
-                      ${hotel.price}{" "}
-                      <span className="text-xs font-normal text-gray-400">/night</span>
+                    <span className="font-bold text-accent text-white">
+                      ₹{hotel.price}{" "}
+                      <span className="text-xs font-normal text-white">/night</span>
                     </span>
                   </li>
                 ))}
@@ -81,7 +81,7 @@ function DetailsModal({ destination, onClose }) {
                 {destination.cabs.map((cab, index) => (
                   <li key={index} className="py-2 flex justify-between items-center">
                     <span className="text-gray-300">{cab.type}</span>
-                    <span className="font-bold text-accent">${cab.price}</span>
+                    <span className="font-bold text-accent text-white">₹{cab.price}</span>
                   </li>
                 ))}
               </ul>

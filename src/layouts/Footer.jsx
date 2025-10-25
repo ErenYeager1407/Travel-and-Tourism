@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <h3 className="text-xl font-bold text-white mb-4">
-              TravelCo India
+              IndiTrails
             </h3>
             <p className="text-gray-400">
               Your gateway to unforgettable adventures across India.

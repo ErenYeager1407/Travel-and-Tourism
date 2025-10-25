@@ -23,7 +23,7 @@ function UserDropdown({ user, onLogout }) {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-bold text-lg"
+        className="hover:cursor-pointer flex items-center justify-center w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-bold text-lg"
       >
         {user?.name ? user.name[0].toUpperCase() : "U"}
       </button>
@@ -74,15 +74,19 @@ export default function Header({ authUser, setAuthUser }) {
     { to: "/contact", label: "Contact" },
   ];
 
-  const getNavLinkClass = ({ isActive }) =>
-    isActive
-      ? "text-primary dark:text-white font-bold"
+  const getNavLinkClass = ({ isActive }) =>{
+    console.log(isActive)
+    return isActive
+      ? "text-primary dark:text-white font-bold color-white"
       : "text-dark dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors";
-
+  }
   return (
     <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold text-primary dark:text-white">
+        <Link
+          to="/"
+          className="text-2xl font-bold text-primary dark:text-white"
+        >
           IndiTrails
         </Link>
 
@@ -90,7 +94,10 @@ export default function Header({ authUser, setAuthUser }) {
         <ul className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <li key={link.to}>
-              <NavLink to={link.to} className={getNavLinkClass}>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) => getNavLinkClass({ isActive })}
+              >
                 {link.label}
               </NavLink>
             </li>
@@ -103,9 +110,13 @@ export default function Header({ authUser, setAuthUser }) {
             <UserDropdown user={authUser} onLogout={handleLogout} />
           ) : (
             <>
-              <NavLink to="/login" className={getNavLinkClass}>
+              <NavLink
+                to="/login"
+                className={({ isActive }) => getNavLinkClass({ isActive })}
+              >
                 Login
               </NavLink>
+
               <Link
                 to="/signup"
                 className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:-translate-y-0.5 transition"

@@ -31,7 +31,7 @@ export default function Home() {
 
       <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center text-primary mb-2">
+          <h2 className="text-3xl font-bold text-center text-primary mb-2 text-white">
             Featured Destinations
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
@@ -51,7 +51,7 @@ export default function Home() {
 
       <section className="py-20 bg-white dark:bg-gray-800 text-center">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-primary mb-8">
+          <h2 className="text-3xl text-white font-bold text-primary mb-8">
             Why Choose Us?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-dark dark:text-gray-300">
