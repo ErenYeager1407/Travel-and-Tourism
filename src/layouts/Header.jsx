@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useOutletContext } from "react-router-dom";
 import { MenuIcon, XIcon } from "../components/index";
 import { logoutUser } from "../lib/appwrite";
 
 // ✅ Dropdown for logged-in user
+
 function UserDropdown({ user, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -53,13 +54,15 @@ function UserDropdown({ user, onLogout }) {
   );
 }
 
-export default function Header({ authUser, setAuthUser }) {
+export default function Header({ authUser, setAuthUser, setIsLoading}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  // const {setIsLoading} = useOutletContext();
   const handleLogout = async () => {
     try {
+      setIsLoading(true)
       await logoutUser();
       setAuthUser(null);
+      setIsLoading(false)
     } catch (err) {
       console.error("Logout failed:", err);
     }

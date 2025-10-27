@@ -7,15 +7,17 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { setAuthUser } = useOutletContext();
+  const { setAuthUser, setIsLoading} = useOutletContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       await loginUser(email, password);
       const user = await getCurrentUser();
       setAuthUser(user);
       navigate("/"); // redirect to home
+      setIsLoading(false);
     } catch (err) {
       setError(err.message);
     }
