@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import SearchBar from "../components/shared/SearchBar";
-import DestinationCard from "../components/shared/DestinationCard";
-import DetailsModal from "../components/shared/DetailsModal";
 import { indianDestinationsData } from "../data/destinations";
+import {SearchBar, DestinationCard, DetailsModal} from "../components/index"
 
 export default function Home() {
   const [selectedDestination, setSelectedDestination] = useState(null);
