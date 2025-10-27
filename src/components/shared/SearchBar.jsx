@@ -15,17 +15,19 @@ function GuestPopup({ guests, setGuests, rooms, setRooms, onClose }) {
           <div className="flex items-center gap-4">
             <button
               type="button"
-              onClick={() => setGuests(prev => Math.max(1, prev - 1))}
+              onClick={() => setGuests((prev) => Math.max(1, prev - 1))}
               disabled={guests <= 1}
               className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-600 transition hover:border-gray-500 disabled:opacity-50"
             >
               -
             </button>
             {/* FIX: Added text-gray-700 to the number */}
-            <span className="w-4 text-center font-semibold text-gray-700">{guests}</span>
+            <span className="w-4 text-center font-semibold text-gray-700">
+              {guests}
+            </span>
             <button
               type="button"
-              onClick={() => setGuests(prev => prev + 1)}
+              onClick={() => setGuests((prev) => prev + 1)}
               className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-600 transition hover:border-gray-500"
             >
               +
@@ -42,17 +44,19 @@ function GuestPopup({ guests, setGuests, rooms, setRooms, onClose }) {
           <div className="flex items-center gap-4">
             <button
               type="button"
-              onClick={() => setRooms(prev => Math.max(1, prev - 1))}
+              onClick={() => setRooms((prev) => Math.max(1, prev - 1))}
               disabled={rooms <= 1}
               className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-600 transition hover:border-gray-500 disabled:opacity-50"
             >
               -
             </button>
             {/* FIX: Added text-gray-700 to the number */}
-            <span className="w-4 text-center font-semibold text-gray-700">{rooms}</span>
+            <span className="w-4 text-center font-semibold text-gray-700">
+              {rooms}
+            </span>
             <button
               type="button"
-              onClick={() => setRooms(prev => prev + 1)}
+              onClick={() => setRooms((prev) => prev + 1)}
               className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-600 transition hover:border-gray-500"
             >
               +
@@ -60,16 +64,15 @@ function GuestPopup({ guests, setGuests, rooms, setRooms, onClose }) {
           </div>
         </div>
       </div>
-       <button 
-          onClick={onClose} 
-          className="mt-4 w-full rounded-lg bg-blue-600 py-2 text-white font-semibold hover:bg-blue-700 transition"
-        >
-          Done
-        </button>
+      <button
+        onClick={onClose}
+        className="mt-4 w-full rounded-lg bg-blue-600 py-2 text-white font-semibold hover:bg-blue-700 transition"
+      >
+        Done
+      </button>
     </div>
   );
 }
-
 
 // --- MODIFIED SEARCHBAR COMPONENT ---
 export default function SearchBar() {
@@ -79,7 +82,7 @@ export default function SearchBar() {
   const [rooms, setRooms] = useState(1);
   const [inputType, setInputType] = useState("text");
   const [searchResult, setSearchResult] = useState("");
-  
+
   const [isGuestPopupOpen, setIsGuestPopupOpen] = useState(false);
   const popupRef = useRef(null);
 
@@ -108,7 +111,7 @@ export default function SearchBar() {
     const resultString = `Searching for: Location: ${location}, Date: ${date}, Guests: ${guests}, Rooms: ${rooms}`;
     setSearchResult(resultString);
 
-    setTimeout(() => setSearchResult(""), 5000);
+    setTimeout(() => setSearchResult(""), 6000);
   };
 
   return (
@@ -120,12 +123,19 @@ export default function SearchBar() {
         >
           {/* Location Section */}
           <div className="flex-1 w-full cursor-pointer rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200">
-            <label htmlFor="location" className="block text-xs font-bold text-gray-800">Destination</label>
+            <label
+              htmlFor="location"
+              className="block text-xs font-bold text-gray-800"
+            >
+              Destination
+            </label>
             <input
-              type="text" id="location" value={location}
+              type="text"
+              id="location"
+              value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Where are you going?"
-              className="w-full bg-transparent focus:outline-none text-sm placeholder-gray-500 text-gray-900"
+              className="w-full bg-transparent focus:outline-none text-sm placeholder-gray-500 text-gray-900 flex justify-center text-center"
               required
             />
           </div>
@@ -134,12 +144,21 @@ export default function SearchBar() {
 
           {/* Date Section */}
           <div className="flex-1 w-full cursor-pointer rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200">
-            <label htmlFor="date" className="block text-xs font-bold text-gray-800">Date</label>
+            <label
+              htmlFor="date"
+              className="block text-xs font-bold text-gray-800"
+            >
+              Date
+            </label>
             <input
-              type={inputType} id="date" value={date}
-              placeholder="Select trip start date" onFocus={handleDateFocus}
-              onBlur={handleDateBlur} onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-transparent focus:outline-none text-sm placeholder-gray-500 text-gray-900"
+              type={inputType}
+              id="date"
+              value={date}
+              placeholder="Select trip start date"
+              onFocus={handleDateFocus}
+              onBlur={handleDateBlur}
+              onChange={(e) => setDate(e.target.value)}
+              className="w-full bg-transparent focus:outline-none text-sm placeholder-gray-500 text-gray-900 flex justify-center text-center"
               required
             />
           </div>
@@ -147,12 +166,22 @@ export default function SearchBar() {
           <div className="hidden sm:block w-px h-8 bg-gray-200"></div>
 
           {/* Guests & Search Button Section */}
-          <div className="relative flex-1 w-full flex items-center justify-between rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200" ref={popupRef}>
-            <div onClick={() => setIsGuestPopupOpen(!isGuestPopupOpen)} className="w-full cursor-pointer">
-              <p className="block text-xs font-bold text-gray-800">Guests & Rooms</p>
-              <p className="text-sm text-gray-500 font-semibold">{`${guests} Guests, ${rooms} Room${rooms > 1 ? "s" : ""}`}</p>
+          <div
+            className="relative flex-1 w-full flex items-center justify-between rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200"
+            ref={popupRef}
+          >
+            <div
+              onClick={() => setIsGuestPopupOpen(!isGuestPopupOpen)}
+              className="w-full cursor-pointer"
+            >
+              <p className="block text-xs font-bold text-gray-800">
+                Guests & Rooms
+              </p>
+              <p className="text-sm text-gray-500 font-semibold">{`${guests} Guests, ${rooms} Room${
+                rooms > 1 ? "s" : ""
+              }`}</p>
             </div>
-            
+
             <button
               type="submit"
               className="bg-blue-600 text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center shadow-md hover:bg-blue-700 hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 sm:mr-2"
@@ -160,7 +189,7 @@ export default function SearchBar() {
             >
               <SearchIcon className="w-5 h-5" />
             </button>
-            
+
             {isGuestPopupOpen && (
               <GuestPopup
                 guests={guests}

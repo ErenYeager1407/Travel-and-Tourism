@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { MenuIcon, XIcon } from "../components/shared/Icons";
+import { MenuIcon, XIcon } from "../components/index";
 import { logoutUser } from "../lib/appwrite";
 
 // ✅ Dropdown for logged-in user
@@ -74,13 +74,12 @@ export default function Header({ authUser, setAuthUser }) {
     { to: "/contact", label: "Contact" },
   ];
 
-const getNavLinkClass = ({ isActive }) =>{ // console.log(isActive)
-  return isActive ?
-   "text-[#0B1623] text-white font-bold" :
-    "text-dark dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors";
-}
-
-
+  const getNavLinkClass = ({ isActive }) => {
+    // console.log(isActive)
+    return isActive
+      ? "text-[#0B1623] text-white font-bold"
+      : "text-dark dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors";
+  };
 
   return (
     <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
@@ -130,59 +129,57 @@ const getNavLinkClass = ({ isActive }) =>{ // console.log(isActive)
         </div>
 
         {/* Mobile menu toggle */}
-<div className="md:hidden">
-  <button
-    onClick={() => setIsMenuOpen(!isMenuOpen)}
-    className="text-dark dark:text-gray-200"
-  >
-    {isMenuOpen ? <XIcon /> : <MenuIcon />}
-  </button>
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-dark dark:text-gray-200"
+          >
+            {isMenuOpen ? <XIcon /> : <MenuIcon />}
+          </button>
 
-  {/* Mobile menu */}
-  {isMenuOpen && (
-  <ul className="absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-md flex flex-col items-start p-4 space-y-3 md:hidden z-40">
-    {navLinks.map((link) => (
-      <li key={link.to} className="w-full">
-        <NavLink
-          to={link.to}
-          className={({ isActive }) => getNavLinkClass({ isActive })}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {link.label}
-        </NavLink>
-      </li>
-    ))}
+          {/* Mobile menu */}
+          {isMenuOpen && (
+            <ul className="absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-md flex flex-col items-start p-4 space-y-3 md:hidden z-40">
+              {navLinks.map((link) => (
+                <li key={link.to} className="w-full">
+                  <NavLink
+                    to={link.to}
+                    className={({ isActive }) => getNavLinkClass({ isActive })}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </NavLink>
+                </li>
+              ))}
 
-    {authUser ? (
-      <li className="w-full flex justify-end">
-        <UserDropdown user={authUser} onLogout={handleLogout} />
-      </li>
-    ) : (
-      <li className="w-full flex justify-between gap-2">
-        <NavLink
-          to="/login"
-          className={({ isActive }) =>
-            getNavLinkClass({ isActive }) + " flex-1 text-center py-2 border rounded"
-          }
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Login
-        </NavLink>
-        <Link
-          to="/signup"
-          className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-center py-2 rounded hover:-translate-y-0.5 transition"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Sign Up
-        </Link>
-      </li>
-    )}
-  </ul>
-)}
-
-
-</div>
-
+              {authUser ? (
+                <li className="w-full flex justify-end">
+                  <UserDropdown user={authUser} onLogout={handleLogout} />
+                </li>
+              ) : (
+                <li className="w-full flex justify-between gap-2">
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      getNavLinkClass({ isActive }) +
+                      " flex-1 text-center py-2 border rounded"
+                    }
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Login
+                  </NavLink>
+                  <Link
+                    to="/signup"
+                    className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-center py-2 rounded hover:-translate-y-0.5 transition"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </li>
+              )}
+            </ul>
+          )}
+        </div>
       </nav>
     </header>
   );
