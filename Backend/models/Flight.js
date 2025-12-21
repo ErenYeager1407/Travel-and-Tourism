@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const flightSchema = new mongoose.Schema({
     airline: {
@@ -31,4 +31,4 @@ const flightSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Flight', flightSchema);
+export default mongoose.model('Flight', flightSchema);

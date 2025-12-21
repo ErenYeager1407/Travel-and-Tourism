@@ -1,5 +1,5 @@
-const Destination = require('../models/Destination');
-
+// const Destination = require('../models/Destination');
+import Destination from '../models/Destination.js';
 // @desc    Get all destinations
 // @route   GET /destinations
 // @access  Public
@@ -33,7 +33,11 @@ const getDestinationById = async (req, res) => {
     }
 };
 
-module.exports = {
+// module.exports = {
+//     getDestinations,
+//     getDestinationById,
+// };
+export {
     getDestinations,
     getDestinationById,
 };

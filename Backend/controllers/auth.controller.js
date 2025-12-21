@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const User = require('../models/User');
-const Admin = require('../models/Admin');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import User from '../models/User.js';
+import Admin from '../models/Admin.js';
 
 // Generate JWT
 const generateToken = (id) => {
@@ -131,7 +131,7 @@ const loginUser = async (req, res) => {
     res.status(400).json({ message: 'Invalid credentials' });
 };
 
-module.exports = {
+export {
     registerUser,
     registerAdmin,
     loginUser,

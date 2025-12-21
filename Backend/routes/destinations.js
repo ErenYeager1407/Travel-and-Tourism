@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { getDestinations, getDestinationById } = require('../controllers/destination.controller');
+import { getDestinations, getDestinationById } from '../controllers/destination.controller.js';
 
 router.get('/', getDestinations);
 router.get('/:id', getDestinationById);
 
-module.exports = router;
+export default router;

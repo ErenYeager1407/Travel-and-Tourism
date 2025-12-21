@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { createReview } = require('../controllers/review.controller');
-const { protect } = require('../middlewares/authMiddleware');
+import { createReview } from '../controllers/review.controller.js';
+import { protect } from '../middlewares/authMiddleware.js';
 
 router.post('/', protect, createReview);
 
-module.exports = router;
+export default router;

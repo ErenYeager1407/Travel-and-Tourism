@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const bookingSchema = new mongoose.Schema({
     user: {
@@ -14,7 +14,6 @@ const bookingSchema = new mongoose.Schema({
     hotel: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Hotel',
-        //  required: true // Making optional just in case user only books flight, but per request it seems full package
     },
     flight: {
         type: mongoose.Schema.Types.ObjectId,
@@ -45,4 +44,4 @@ const bookingSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-module.exports = mongoose.model('Booking', bookingSchema);
+export default mongoose.model('Booking', bookingSchema);

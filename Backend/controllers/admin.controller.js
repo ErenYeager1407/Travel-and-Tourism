@@ -1,6 +1,7 @@
-const Destination = require('../models/Destination');
-const Hotel = require('../models/Hotel');
-const Flight = require('../models/Flight');
+import Destination from '../models/Destination.js';
+import Hotel from '../models/Hotel.js';
+import Flight from '../models/Flight.js';
+import Booking from '../models/Booking.js';
 
 // @desc    Create new destination
 // @route   POST /admin/destination
@@ -127,7 +128,6 @@ const createFlight = async (req, res) => {
 // @access  Private/Admin
 const getAllBookings = async (req, res) => {
     try {
-        const Booking = require('../models/Booking');
         const bookings = await Booking.find()
             .populate('user', 'name email')
             .populate('destination', 'name city state')
@@ -145,7 +145,6 @@ const getAllBookings = async (req, res) => {
 // @access  Private/Admin
 const completeBooking = async (req, res) => {
     try {
-        const Booking = require('../models/Booking');
         const booking = await Booking.findById(req.params.id);
 
         if (!booking) {
@@ -185,7 +184,7 @@ const deleteBooking = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     createDestination,
     deleteDestination,
     updateDestination,
@@ -195,3 +194,4 @@ module.exports = {
     completeBooking,
     deleteBooking
 };
+

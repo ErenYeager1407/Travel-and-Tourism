@@ -1,4 +1,4 @@
-const Flight = require('../models/Flight');
+import Flight from '../models/Flight.js';
 
 // @desc    Get flight by ID
 // @route   GET /flights/:id
@@ -16,6 +16,6 @@ const getFlightById = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     getFlightById
 };

@@ -1,4 +1,4 @@
-const Booking = require('../models/Booking');
+import Booking from '../models/Booking.js';
 
 // @desc    Create new booking
 // @route   POST /bookings
@@ -39,7 +39,7 @@ const getMyBookings = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     createBooking,
     getMyBookings
 };

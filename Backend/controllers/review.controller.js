@@ -1,4 +1,4 @@
-const Review = require('../models/Review');
+import Review from '../models/Review.js';
 
 // @desc    Create new review
 // @route   POST /reviews
@@ -20,6 +20,6 @@ const createReview = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     createReview
 };

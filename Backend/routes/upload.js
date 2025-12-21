@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { uploadImage } = require('../controllers/upload.controller');
-const { protect } = require('../middlewares/authMiddleware');
-const { adminMiddleware } = require('../middlewares/adminMiddleware');
-const upload = require('../middlewares/upload');
+import { uploadImage } from '../controllers/upload.controller.js';
+import { protect } from '../middlewares/authMiddleware.js';
+import { adminMiddleware } from '../middlewares/adminMiddleware.js';
+import upload from '../middlewares/upload.js';
 
 router.post('/', protect, adminMiddleware, upload.single('image'), uploadImage);
 
-module.exports = router;
+export default router;

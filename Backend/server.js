@@ -1,7 +1,17 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/db');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import cors from 'cors';
+import connectDB from './config/db.js';
+
+// Import routes
+import authRoutes from './routes/auth.js';
+import destinationsRoutes from './routes/destinations.js';
+import bookingsRoutes from './routes/bookings.js';
+import reviewsRoutes from './routes/reviews.js';
+import adminRoutes from './routes/admin.js';
+import uploadRoutes from './routes/upload.js';
 
 // Connect to database
 connectDB();
@@ -13,26 +23,12 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/auth', require('./routes/auth'));
-app.use('/destinations', require('./routes/destinations'));
-app.use('/bookings', require('./routes/bookings')); // Changed from /bookings/my to /bookings (and controller handles /my) - wait, route file has /my
-// The user requested:
-// POST /bookings
-// GET /bookings/my
-// So if I mount at /bookings:
-// POST /bookings/ -> createBooking
-// GET /bookings/my -> getMyBookings
-// This matches.
-
-app.use('/reviews', require('./routes/reviews'));
-// User requested: POST /reviews
-// Mount at /reviews: POST /reviews/ -> createReview. Matches.
-
-app.use('/admin', require('./routes/admin'));
-// User requested: POST /admin/destination, etc.
-// Mount at /admin: POST /admin/destination. Matches.
-
-app.use('/api/upload', require('./routes/upload'));
+app.use('/auth', authRoutes);
+app.use('/destinations', destinationsRoutes);
+app.use('/bookings', bookingsRoutes);
+app.use('/reviews', reviewsRoutes);
+app.use('/admin', adminRoutes);
+app.use('/api/upload', uploadRoutes);
 
 const PORT = process.env.PORT || 5000;
 

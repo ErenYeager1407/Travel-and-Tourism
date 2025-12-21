@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const {
+import {
     createDestination,
     deleteDestination,
     updateDestination,
@@ -9,9 +9,9 @@ const {
     getAllBookings,
     completeBooking,
     deleteBooking
-} = require('../controllers/admin.controller');
-const { protect } = require('../middlewares/authMiddleware');
-const { adminMiddleware } = require('../middlewares/adminMiddleware');
+} from '../controllers/admin.controller.js';
+import { protect } from '../middlewares/authMiddleware.js';
+import { adminMiddleware } from '../middlewares/adminMiddleware.js';
 
 // All routes here are protected and require admin role
 router.use(protect);
@@ -26,4 +26,4 @@ router.get('/bookings', getAllBookings);
 router.patch('/bookings/:id/complete', completeBooking);
 router.delete('/bookings/:id', deleteBooking);
 
-module.exports = router;
+export default router;

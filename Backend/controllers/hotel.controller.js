@@ -1,4 +1,4 @@
-const Hotel = require('../models/Hotel');
+import Hotel from '../models/Hotel.js';
 
 // @desc    Get hotel by ID
 // @route   GET /hotels/:id
@@ -16,6 +16,6 @@ const getHotelById = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     getHotelById
 };
