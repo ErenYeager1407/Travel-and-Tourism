@@ -1,24 +1,79 @@
-# Logs
-logs
-*.log
+############################
+# Node.js / Backend
+############################
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+############################
+# Environment variables
+############################
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+############################
+# Logs
+############################
+logs/
+*.log
+
+############################
+# OS files
+############################
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+############################
+# Build outputs
+############################
+dist/
+build/
+
+############################
+# React / Frontend
+############################
+client/node_modules/
+client/build/
+client/dist/
+
+############################
+# Backend build (if any)
+############################
+server/dist/
+server/build/
+
+############################
+# Testing
+############################
+coverage/
+
+############################
+# IDE / Editor configs
+############################
+.vscode/
+.idea/
+*.swp
+
+############################
+# MongoDB
+############################
+data/
+*.mongodb
+
+############################
+# Uploads (if stored locally)
+############################
+uploads/
+
+############################
+# Optional lock files
+# (Uncomment if you want to ignore them)
+############################
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
