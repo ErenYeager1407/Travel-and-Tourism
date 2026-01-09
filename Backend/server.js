@@ -34,4 +34,8 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    // console.log("ENV KEYS:", Object.keys(process.env));
+// console.log("MONGO_URI:", process.env.MONGO_URI);
+    console.log("MONGO_URI VALUE =", JSON.stringify(process.env.MONGO_URI));
+
 });
