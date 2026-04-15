@@ -116,7 +116,11 @@ export default function AdminDashboard() {
 
             setDestForm({ name: '', city: '', state: '', description: '', basePrice: '', tags: '', images: '' });
             setUploadedImages([]);
-            fetchDestinations();
+            await fetchDestinations();
+            
+            // Switch to manage section so admin sees the new destination card immediately
+            setActiveSection('manage');
+            setActiveTab('destinations');
         } catch (error) {
             toast.error('Failed to save destination: ' + error.message);
         }
