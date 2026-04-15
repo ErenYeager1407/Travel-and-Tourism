@@ -4,6 +4,7 @@ import { createBooking, getCurrentUser } from "../../lib/api";
 import { useNavigate } from "react-router-dom";
 import api from "../../lib/api";
 import toast from 'react-hot-toast';
+import Map from '../Map';
 
 function DetailsModal({ destination, onClose }) {
   if (!destination) return null;
@@ -141,6 +142,12 @@ function DetailsModal({ destination, onClose }) {
             <XIcon />
           </button>
         </div>
+
+        {destination.coordinates && destination.coordinates.length === 2 && (
+          <div className="px-6 pt-6">
+            <Map coordinates={destination.coordinates} />
+          </div>
+        )}
 
         {/* Booking Form Modal */}
         {showBookingForm && (

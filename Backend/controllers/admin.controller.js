@@ -2,14 +2,45 @@ import Destination from '../models/Destination.js';
 import Hotel from '../models/Hotel.js';
 import Flight from '../models/Flight.js';
 import Booking from '../models/Booking.js';
+import axios from 'axios';
 
 // @desc    Create new destination
 // @route   POST /admin/destination
 // @access  Private/Admin
 const createDestination = async (req, res) => {
+    console.log("CREATE DESTINATION CONTROLLER HIT");
     const { name, city, state, description, images, basePrice, tags } = req.body;
 
     try {
+        const query = `${name}, ${city}, ${state}, India`;
+        
+        console.log("QUERY:", query);
+        console.log("MAPBOX TOKEN:", process.env.MAPBOX_TOKEN);
+
+        if (!process.env.MAPBOX_TOKEN) {
+            throw new Error("MAPBOX_TOKEN is missing");
+        }
+
+        const response = await axios.get(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${process.env.MAPBOX_TOKEN}`
+        );
+
+        console.log("MAPBOX RESPONSE:", response.data);
+
+        if (!response.data.features || response.data.features.length === 0) {
+            return res.status(400).json({
+                message: "Geocoding failed. Try a more specific location."
+            });
+        }
+
+        const [lng, lat] = response.data.features[0].center;
+        
+        if (!lng || !lat) {
+            return res.status(400).json({
+                message: "Invalid coordinates"
+            });
+        }
+
         const destination = await Destination.create({
             name,
             city,
@@ -18,11 +49,14 @@ const createDestination = async (req, res) => {
             images,
             basePrice,
             tags,
+            coordinates: [lng, lat],
             createdBy: req.user.id
         });
-        res.status(201).json(destination);
+        
+        res.status(201).json({ ...destination.toObject(), debug_coordinates: [lng, lat] });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error("Creation error:", error.message);
+        res.status(400).json({ message: error.message || "Failed to create destination." });
     }
 };
 

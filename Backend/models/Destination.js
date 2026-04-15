@@ -17,6 +17,10 @@ const destinationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    coordinates: {
+        type: [Number], // [longitude, latitude]
+        required: false
+    },
     images: [{
         type: String,
     }],
