@@ -145,7 +145,11 @@ function DetailsModal({ destination, onClose }) {
 
         {destination.coordinates && destination.coordinates.length === 2 && (
           <div className="px-6 pt-6">
-            <Map coordinates={destination.coordinates} />
+            <h3 className="text-xl font-bold text-white mb-4">Where you will at</h3>
+            <Map 
+              coordinates={destination.coordinates} 
+              locationName={destination.city && destination.state ? `${destination.city}, ${destination.state}` : destination.location || destination.title || destination.name} 
+            />
           </div>
         )}
 
