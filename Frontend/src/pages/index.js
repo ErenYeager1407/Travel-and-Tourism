@@ -8,6 +8,7 @@ import Blog from "./Blogs";
 import Login from "./Login";
 import Signup from "./Signup";
 import AdminDashboard from "./AdminDashboard";
+import RecommendationPage from "./RecommendationPage";
 
 export {
   Home,
@@ -19,5 +20,6 @@ export {
   Blog,
   Login,
   Signup,
-  AdminDashboard
+  AdminDashboard,
+  RecommendationPage
 };

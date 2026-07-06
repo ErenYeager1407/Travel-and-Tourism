@@ -12,6 +12,7 @@ import bookingsRoutes from './routes/bookings.js';
 import reviewsRoutes from './routes/reviews.js';
 import adminRoutes from './routes/admin.js';
 import uploadRoutes from './routes/upload.js';
+import recommendationRoutes from './routes/recommendation.routes.js';
 
 // Connect to database
 connectDB();
@@ -29,6 +30,7 @@ app.use('/bookings', bookingsRoutes);
 app.use('/reviews', reviewsRoutes);
 app.use('/admin', adminRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api', recommendationRoutes);
 
 const PORT = process.env.PORT || 5000;
 

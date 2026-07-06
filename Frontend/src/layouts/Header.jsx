@@ -71,6 +71,7 @@ export default function Header({ authUser, setAuthUser, setIsLoading }) {
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/destinations", label: "Destinations" },
+    { to: "/recommendations", label: "Recommendations" },
     { to: "/deals", label: "Deals" },
     { to: "/blog", label: "Blog" },
     { to: "/about", label: "About" },

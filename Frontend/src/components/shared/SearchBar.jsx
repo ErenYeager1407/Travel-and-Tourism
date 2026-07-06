@@ -75,7 +75,7 @@ function GuestPopup({ guests, setGuests, rooms, setRooms, onClose }) {
 }
 
 // --- MODIFIED SEARCHBAR COMPONENT ---
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState(2);
@@ -108,6 +108,11 @@ export default function SearchBar() {
     setIsGuestPopupOpen(false);
     const searchData = { location, date, guests, rooms };
     console.log("Searching with:", searchData);
+    
+    if (onSearch) {
+      onSearch(searchData);
+    }
+
     const resultString = `Searching for: Location: ${location}, Date: ${date}, Guests: ${guests}, Rooms: ${rooms}`;
     setSearchResult(resultString);
 

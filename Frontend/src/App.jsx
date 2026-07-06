@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
 import RootLayout from "./layouts/RootLayout";
-import { Home, Destinations, About, Contact, Profile, Deals, Blog, Signup, Login, AdminDashboard } from "./pages/index"
+import { Home, Destinations, About, Contact, Profile, Deals, Blog, Signup, Login, AdminDashboard, RecommendationPage } from "./pages/index"
 
 // Router Configuration
 export const router = createBrowserRouter([
@@ -11,6 +11,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "destinations", element: <Destinations /> },
+      { path: "recommendations", element: <RecommendationPage /> },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "profile", element: <Profile /> },

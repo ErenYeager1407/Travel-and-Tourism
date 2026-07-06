@@ -6,6 +6,7 @@ export default function Home() {
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,6 +23,16 @@ export default function Home() {
     fetchDestinations();
   }, []);
 
+  const filteredDestinations = destinations.filter((dest) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase().trim();
+    return (
+      (dest.name && dest.name.toLowerCase().includes(query)) ||
+      (dest.city && dest.city.toLowerCase().includes(query)) ||
+      (dest.state && dest.state.toLowerCase().includes(query))
+    );
+  });
+
   return (
     <main>
       <section
@@ -36,7 +47,7 @@ export default function Home() {
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto drop-shadow-md">
             From serene backwaters to majestic mountains, your Indian adventure starts here.
           </p>
-          <SearchBar />
+          <SearchBar onSearch={(searchData) => setSearchQuery(searchData.location)} />
         </div>
       </section>
 
@@ -59,8 +70,13 @@ export default function Home() {
                 <p className="text-xl text-gray-400">No destinations available yet.</p>
                 <p className="text-sm text-gray-500 mt-2">Check back soon or contact an admin to add destinations.</p>
               </div>
+            ) : filteredDestinations.length === 0 ? (
+              <div className="col-span-full text-center py-10">
+                <p className="text-xl text-gray-400">No destinations found matching "{searchQuery}".</p>
+                <p className="text-sm text-gray-500 mt-2">Try searching for a different city, state, or name.</p>
+              </div>
             ) : (
-              destinations.map((dest, index) => (
+              filteredDestinations.map((dest, index) => (
                 <DestinationCard
                   key={dest._id || index}
                   destination={dest}
