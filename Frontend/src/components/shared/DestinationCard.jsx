@@ -9,7 +9,7 @@ function DestinationCard({ destination, onCardClick }) {
   const location = destination.city && destination.state
     ? `${destination.city}, ${destination.state}`
     : destination.location;
-  const price = destination.basePrice || destination.price;
+  const price = destination.estimatedTripCost || destination.basePrice || destination.price;
   const rating = destination.rating || 4;
   const description = destination.description || '';
 

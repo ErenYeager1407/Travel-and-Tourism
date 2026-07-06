@@ -8,7 +8,8 @@ import {
     createFlight,
     getAllBookings,
     completeBooking,
-    deleteBooking
+    deleteBooking,
+    bulkAddDestinations
 } from '../controllers/admin.controller.js';
 import { protect } from '../middlewares/authMiddleware.js';
 import { adminMiddleware } from '../middlewares/adminMiddleware.js';
@@ -22,8 +23,9 @@ router.delete('/destination/:id', deleteDestination);
 router.put('/destination/:id', updateDestination);
 router.post('/hotel', createHotel);
 router.post('/flight', createFlight);
-router.get('/bookings', getAllBookings);
+router.get('/bookings', getAllBookings);    
 router.patch('/bookings/:id/complete', completeBooking);
 router.delete('/bookings/:id', deleteBooking);
+router.post('/bulkadd', bulkAddDestinations);
 
 export default router;

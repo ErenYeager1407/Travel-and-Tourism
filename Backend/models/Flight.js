@@ -18,6 +18,10 @@ const flightSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    startTime:{
+        type: String,
+        required: true,
+    },
     duration: {
         type: String, // e.g., "2h 30m"
         required: true,

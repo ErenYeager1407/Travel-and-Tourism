@@ -131,8 +131,18 @@ const loginUser = async (req, res) => {
     res.status(400).json({ message: 'Invalid credentials' });
 };
 
+// @desc    Logout user
+// @route   POST /auth/logout
+// @access  Public
+const logoutUser = (req, res) => {
+    // In a stateless JWT setup, the actual logout is handled by the client
+    // clearing the token from local storage.
+    res.status(200).json({ message: 'Logged out successfully' });
+};
+
 export {
     registerUser,
     registerAdmin,
     loginUser,
+    logoutUser,
 };

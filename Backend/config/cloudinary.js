@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import cloudinary from 'cloudinary';
 
 cloudinary.v2.config({

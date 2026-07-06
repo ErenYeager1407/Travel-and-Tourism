@@ -43,6 +43,15 @@ function DetailsModal({ destination, onClose }) {
   }, [destination]);
 
   // Check if a flight or hotel is already booked (exclude completed ones)
+  const parseDuration = (durationStr) => {
+    if (!durationStr) return 0;
+    const hoursMatch = durationStr.match(/(\d+)h/i);
+    const minutesMatch = durationStr.match(/(\d+)m/i);
+    const hours = hoursMatch ? parseInt(hoursMatch[1]) : 0;
+    const minutes = minutesMatch ? parseInt(minutesMatch[1]) : 0;
+    return (hours * 60 + minutes) * 60000;
+  };
+
   const isBooked = (type, itemId) => {
     return userBookings.some(booking => {
       // Exclude completed bookings
@@ -86,14 +95,25 @@ function DetailsModal({ destination, onClose }) {
       ? bookingItem.pricePerNight * numberOfDays
       : bookingItem.price * bookingForm.guests;
 
-    const bookingData = {
-      destination: destination._id,
-      [bookingType]: bookingItem._id,
-      startDate: new Date(bookingForm.startDate).toISOString(),
-      endDate: new Date(bookingForm.endDate).toISOString(),
-      guests: Number(bookingForm.guests),
-      totalPrice: totalPrice,
-    };
+    let bookingData;
+    if (bookingType === 'flight') {
+      bookingData = {
+        destination: destination._id,
+        flight: bookingItem._id,
+        flightDate: new Date(bookingForm.startDate).toISOString(),
+        passengers: Number(bookingForm.guests),
+        totalPrice: totalPrice,
+      };
+    } else {
+      bookingData = {
+        destination: destination._id,
+        hotel: bookingItem._id,
+        startDate: new Date(bookingForm.startDate).toISOString(),
+        endDate: new Date(bookingForm.endDate).toISOString(),
+        guests: Number(bookingForm.guests),
+        totalPrice: totalPrice,
+      };
+    }
 
     try {
       await createBooking(bookingData);
@@ -161,7 +181,9 @@ function DetailsModal({ destination, onClose }) {
             </h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-gray-300 mb-1">Number of Guests</label>
+                <label className="block text-sm text-gray-300 mb-1">
+                  {bookingType === 'hotel' ? 'Number of Guests' : 'Number of Passengers'}
+                </label>
                 <input
                   type="number"
                   min="1"
@@ -170,24 +192,62 @@ function DetailsModal({ destination, onClose }) {
                   className="w-full p-2 rounded bg-gray-600 text-white border border-gray-500"
                 />
               </div>
-              <div>
-                <label className="block text-sm text-gray-300 mb-1">Start Date</label>
-                <input
-                  type="date"
-                  value={bookingForm.startDate}
-                  onChange={(e) => setBookingForm({ ...bookingForm, startDate: e.target.value })}
-                  className="w-full p-2 rounded bg-gray-600 text-white border border-gray-500"
-                />
-              </div>
-              <div className="col-span-2">
-                <label className="block text-sm text-gray-300 mb-1">End Date</label>
-                <input
-                  type="date"
-                  value={bookingForm.endDate}
-                  onChange={(e) => setBookingForm({ ...bookingForm, endDate: e.target.value })}
-                  className="w-full p-2 rounded bg-gray-600 text-white border border-gray-500"
-                />
-              </div>
+              {bookingType === 'hotel' ? (
+                <>
+                  <div>
+                    <label className="block text-sm text-gray-300 mb-1">Start Date</label>
+                    <input
+                      type="date"
+                      value={bookingForm.startDate}
+                      onChange={(e) => setBookingForm({ ...bookingForm, startDate: e.target.value })}
+                      className="w-full p-2 rounded bg-gray-600 text-white border border-gray-500"
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <label className="block text-sm text-gray-300 mb-1">End Date</label>
+                    <input
+                      type="date"
+                      value={bookingForm.endDate}
+                      onChange={(e) => setBookingForm({ ...bookingForm, endDate: e.target.value })}
+                      className="w-full p-2 rounded bg-gray-600 text-white border border-gray-500"
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="col-span-2">
+                    <label className="block text-sm text-gray-300 mb-1">Travel Date</label>
+                    <input
+                      type="date"
+                      value={bookingForm.startDate}
+                      onChange={(e) => setBookingForm({ ...bookingForm, startDate: e.target.value })}
+                      className="w-full p-2 rounded bg-gray-600 text-white border border-gray-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-300 mb-1">Departure Time</label>
+                    <div className="w-full p-2 rounded bg-gray-600 text-white border border-gray-500">
+                      {bookingItem.startTime || 'N/A'}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-300 mb-1">Arrival Time</label>
+                    <div className="w-full p-2 rounded bg-gray-600 text-white border border-gray-500">
+                      {(() => {
+                         if (!bookingItem.startTime) return 'N/A';
+                         try {
+                           // Use an arbitrary date to compute time + duration
+                           const dummyDate = new Date(`1970-01-01T${bookingItem.startTime}:00Z`);
+                           const endTime = new Date(dummyDate.getTime() + parseDuration(bookingItem.duration));
+                           return endTime.toISOString().substr(11, 5); // returns HH:mm
+                         } catch (e) {
+                           return 'N/A';
+                         }
+                      })()}
+                    </div>
+                  </div>
+                </>
+              )}
               <div className="col-span-2 flex gap-3">
                 <button
                   onClick={handleConfirmBooking}
@@ -219,9 +279,19 @@ function DetailsModal({ destination, onClose }) {
               <ul className="bg-gray-900/50 p-4 rounded-md divide-y divide-gray-700">
                 {destination.flights.map((flight, index) => (
                   <li key={index} className="py-2 flex justify-between items-center">
-                    <div className="flex-1">
-                      <span className="text-gray-300">{flight.airline}</span>
-                      <span className="text-xs text-gray-500 ml-2">({flight.seats || 180} seats)</span>
+                    <div className="flex-1 flex flex-col">
+                      <div>
+                        <span className="text-gray-300">{flight.airline}</span>
+                        <span className="text-xs text-gray-500 ml-2">({flight.seats || 180} seats)</span>
+                      </div>
+                      {flight.startTime && (
+                        <div className="text-xs text-gray-400 mt-1">
+                          Departure: {flight.startTime} | Duration: {flight.duration}
+                        </div>
+                      )}
+                      {!flight.startTime && flight.duration && (
+                         <div className="text-xs text-gray-400 mt-1">Duration: {flight.duration}</div>
+                      )}
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="font-bold text-accent text-white">₹{flight.price}</span>

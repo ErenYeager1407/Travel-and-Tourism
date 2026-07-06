@@ -15,13 +15,16 @@ export default function AdminDashboard() {
 
     // Form states
     const [destForm, setDestForm] = useState({
-        name: '', city: '', state: '', description: '', basePrice: '', tags: '', images: ''
+        name: '', city: '', state: '', description: '', basePrice: '', tags: '', images: '',
+        bestSeasons: '', activities: '', tripDuration: '', budgetCategory: 'Medium', suitableFor: '',
+        crowdLevel: 'Medium', popularityScore: '', offbeatScore: '', averageTemperature: '',
+        nearestAirport: '', bestMonths: '', recommendationReason: ''
     });
     const [hotelForm, setHotelForm] = useState({
         name: '', destinationId: '', pricePerNight: '', amenities: '', images: '', rooms: ''
     });
     const [flightForm, setFlightForm] = useState({
-        airline: '', destinationId: '', sourceCity: '', price: '', duration: '', seats: ''
+        airline: '', destinationId: '', sourceCity: '', price: '', duration: '', seats: '', startTime: ''
     });
 
     // Image upload states
@@ -100,7 +103,15 @@ export default function AdminDashboard() {
                 ...destForm,
                 basePrice: Number(destForm.basePrice),
                 tags: destForm.tags.split(',').map(t => t.trim()).filter(t => t),
-                images: destForm.images.split(',').map(i => i.trim()).filter(i => i)
+                images: uploadedImages,
+                bestSeasons: destForm.bestSeasons ? destForm.bestSeasons.split(',').map(t => t.trim()).filter(t => t) : [],
+                activities: destForm.activities ? destForm.activities.split(',').map(t => t.trim()).filter(t => t) : [],
+                suitableFor: destForm.suitableFor ? destForm.suitableFor.split(',').map(t => t.trim()).filter(t => t) : [],
+                bestMonths: destForm.bestMonths ? destForm.bestMonths.split(',').map(t => t.trim()).filter(t => t) : [],
+                tripDuration: destForm.tripDuration ? Number(destForm.tripDuration) : undefined,
+                popularityScore: destForm.popularityScore ? Number(destForm.popularityScore) : undefined,
+                offbeatScore: destForm.offbeatScore ? Number(destForm.offbeatScore) : undefined,
+                averageTemperature: destForm.averageTemperature ? Number(destForm.averageTemperature) : undefined,
             };
 
             if (editingDestination) {
@@ -114,7 +125,7 @@ export default function AdminDashboard() {
                 toast.success('Destination added successfully!');
             }
 
-            setDestForm({ name: '', city: '', state: '', description: '', basePrice: '', tags: '', images: '' });
+            setDestForm({ name: '', city: '', state: '', description: '', basePrice: '', tags: '', images: '', bestSeasons: '', activities: '', tripDuration: '', budgetCategory: 'Medium', suitableFor: '', crowdLevel: 'Medium', popularityScore: '', offbeatScore: '', averageTemperature: '', nearestAirport: '', bestMonths: '', recommendationReason: '' });
             setUploadedImages([]);
             await fetchDestinations();
             
@@ -155,7 +166,7 @@ export default function AdminDashboard() {
             };
             await api.post('/admin/flight', payload);
             toast.success('Flight added successfully!');
-            setFlightForm({ airline: '', destinationId: '', sourceCity: '', price: '', duration: '', seats: '' });
+            setFlightForm({ airline: '', destinationId: '', sourceCity: '', price: '', duration: '', seats: '', startTime: '' });
             fetchDestinations();
         } catch (error) {
             toast.error('Failed to add flight: ' + error.message);
@@ -171,7 +182,19 @@ export default function AdminDashboard() {
             description: dest.description,
             basePrice: dest.basePrice,
             tags: dest.tags?.join(', ') || '',
-            images: dest.images?.join(', ') || ''
+            images: dest.images?.join(', ') || '',
+            bestSeasons: dest.bestSeasons?.join(', ') || '',
+            activities: dest.activities?.join(', ') || '',
+            tripDuration: dest.tripDuration || '',
+            budgetCategory: dest.budgetCategory || 'Medium',
+            suitableFor: dest.suitableFor?.join(', ') || '',
+            crowdLevel: dest.crowdLevel || 'Medium',
+            popularityScore: dest.popularityScore || '',
+            offbeatScore: dest.offbeatScore || '',
+            averageTemperature: dest.averageTemperature || '',
+            nearestAirport: dest.nearestAirport || '',
+            bestMonths: dest.bestMonths?.join(', ') || '',
+            recommendationReason: dest.recommendationReason || ''
         });
         setUploadedImages(dest.images || []);
         setActiveSection('add');
@@ -269,7 +292,7 @@ export default function AdminDashboard() {
                                         <button
                                             onClick={() => {
                                                 setEditingDestination(null);
-                                                setDestForm({ name: '', city: '', state: '', description: '', basePrice: '', tags: '', images: '' });
+                                                setDestForm({ name: '', city: '', state: '', description: '', basePrice: '', tags: '', images: '', bestSeasons: '', activities: '', tripDuration: '', budgetCategory: 'Medium', suitableFor: '', crowdLevel: 'Medium', popularityScore: '', offbeatScore: '', averageTemperature: '', nearestAirport: '', bestMonths: '', recommendationReason: '' });
                                                 setUploadedImages([]);
                                             }}
                                             className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
@@ -285,6 +308,38 @@ export default function AdminDashboard() {
                                     <input type="number" placeholder="Base Price" className="border p-2 rounded" value={destForm.basePrice} onChange={(e) => setDestForm({ ...destForm, basePrice: e.target.value })} required />
                                     <textarea placeholder="Description" className="border p-2 rounded col-span-2" value={destForm.description} onChange={(e) => setDestForm({ ...destForm, description: e.target.value })} required />
                                     <input type="text" placeholder="Tags (comma-separated)" className="border p-2 rounded col-span-2" value={destForm.tags} onChange={(e) => setDestForm({ ...destForm, tags: e.target.value })} />
+
+                                    {/* Recommendation Fields */}
+                                    <div className="col-span-2 mt-4 font-bold text-gray-700">Recommendation Info</div>
+                                    
+                                    <input type="text" placeholder="Best Seasons (comma-separated, e.g., Summer, Winter)" className="border p-2 rounded" value={destForm.bestSeasons} onChange={(e) => setDestForm({ ...destForm, bestSeasons: e.target.value })} />
+                                    <input type="text" placeholder="Activities (comma-separated)" className="border p-2 rounded" value={destForm.activities} onChange={(e) => setDestForm({ ...destForm, activities: e.target.value })} />
+                                    
+                                    <input type="number" placeholder="Trip Duration (days)" className="border p-2 rounded" value={destForm.tripDuration} onChange={(e) => setDestForm({ ...destForm, tripDuration: e.target.value })} />
+                                    
+                                    <select className="border p-2 rounded" value={destForm.budgetCategory} onChange={(e) => setDestForm({ ...destForm, budgetCategory: e.target.value })}>
+                                        <option value="Low">Budget: Low</option>
+                                        <option value="Medium">Budget: Medium</option>
+                                        <option value="High">Budget: High</option>
+                                    </select>
+
+                                    <input type="text" placeholder="Suitable For (comma-separated, e.g., Solo, Family)" className="border p-2 rounded" value={destForm.suitableFor} onChange={(e) => setDestForm({ ...destForm, suitableFor: e.target.value })} />
+                                    
+                                    <select className="border p-2 rounded" value={destForm.crowdLevel} onChange={(e) => setDestForm({ ...destForm, crowdLevel: e.target.value })}>
+                                        <option value="Low">Crowd Level: Low</option>
+                                        <option value="Medium">Crowd Level: Medium</option>
+                                        <option value="High">Crowd Level: High</option>
+                                    </select>
+
+                                    <input type="number" placeholder="Popularity Score (0-100)" className="border p-2 rounded" value={destForm.popularityScore} onChange={(e) => setDestForm({ ...destForm, popularityScore: e.target.value })} />
+                                    <input type="number" placeholder="Offbeat Score (0-100)" className="border p-2 rounded" value={destForm.offbeatScore} onChange={(e) => setDestForm({ ...destForm, offbeatScore: e.target.value })} />
+                                    
+                                    <input type="number" placeholder="Avg Temperature (°C)" className="border p-2 rounded" value={destForm.averageTemperature} onChange={(e) => setDestForm({ ...destForm, averageTemperature: e.target.value })} />
+                                    <input type="text" placeholder="Nearest Airport" className="border p-2 rounded" value={destForm.nearestAirport} onChange={(e) => setDestForm({ ...destForm, nearestAirport: e.target.value })} />
+                                    
+                                    <input type="text" placeholder="Best Months (comma-separated)" className="border p-2 rounded" value={destForm.bestMonths} onChange={(e) => setDestForm({ ...destForm, bestMonths: e.target.value })} />
+                                    <input type="text" placeholder="Recommendation Reason" className="border p-2 rounded col-span-2" value={destForm.recommendationReason} onChange={(e) => setDestForm({ ...destForm, recommendationReason: e.target.value })} />
+
 
                                     {/* Image Upload Section */}
                                     <div className="col-span-2 border-2 border-dashed border-gray-300 rounded-lg p-4">
@@ -357,7 +412,11 @@ export default function AdminDashboard() {
                                     <input type="text" placeholder="Source City" className="border p-2 rounded" value={flightForm.sourceCity} onChange={(e) => setFlightForm({ ...flightForm, sourceCity: e.target.value })} required />
                                     <input type="number" placeholder="Price" className="border p-2 rounded" value={flightForm.price} onChange={(e) => setFlightForm({ ...flightForm, price: e.target.value })} required />
                                     <input type="number" placeholder="Number of Seats" className="border p-2 rounded" value={flightForm.seats} onChange={(e) => setFlightForm({ ...flightForm, seats: e.target.value })} required />
-                                    <input type="text" placeholder="Duration (e.g., 2h 30m)" className="border p-2 rounded col-span-2" value={flightForm.duration} onChange={(e) => setFlightForm({ ...flightForm, duration: e.target.value })} required />
+                                    <input type="text" placeholder="Duration (e.g., 2h 30m)" className="border p-2 rounded" value={flightForm.duration} onChange={(e) => setFlightForm({ ...flightForm, duration: e.target.value })} required />
+                                    <div className="flex flex-col">
+                                        <label className="text-sm text-gray-600 mb-1">Departure Time</label>
+                                        <input type="time" className="border p-2 rounded" value={flightForm.startTime} onChange={(e) => setFlightForm({ ...flightForm, startTime: e.target.value })} required />
+                                    </div>
                                     <button type="submit" className="col-span-2 bg-purple-600 text-white py-2 rounded hover:bg-purple-700">Add Flight</button>
                                 </form>
                             </div>
@@ -448,9 +507,15 @@ export default function AdminDashboard() {
                                                             {booking.flight && <span>Flight: {booking.flight.airline}</span>}
                                                         </td>
                                                         <td className="border p-2">
-                                                            {new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}
+                                                            {booking.flightDate 
+                                                                ? new Date(booking.flightDate).toLocaleDateString() 
+                                                                : `${new Date(booking.startDate).toLocaleDateString()} - ${new Date(booking.endDate).toLocaleDateString()}`}
                                                         </td>
-                                                        <td className="border p-2">{booking.guests}</td>
+                                                        <td className="border p-2">
+                                                            {booking.passengers !== undefined 
+                                                                ? `${booking.passengers} passengers` 
+                                                                : `${booking.guests} guests`}
+                                                        </td>
                                                         <td className="border p-2">₹{booking.totalPrice}</td>
                                                         <td className="border p-2">
                                                             <span className={`px-2 py-1 rounded text-xs ${booking.status === 'CONFIRMED' ? 'bg-green-200 text-green-800' :

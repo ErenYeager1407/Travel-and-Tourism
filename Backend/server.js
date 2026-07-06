@@ -39,3 +39,5 @@ app.listen(PORT, () => {
     console.log("MONGO_URI VALUE =", JSON.stringify(process.env.MONGO_URI));
 
 });
+
+// Force restart trigger to load fresh env variables
