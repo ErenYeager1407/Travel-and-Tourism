@@ -15,38 +15,45 @@ function DestinationCard({ destination, onCardClick }) {
 
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+      className="bg-gray-900/60 hover:bg-gray-900 border border-white/5 hover:border-cyan-500/30 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-cyan-500/5 overflow-hidden group transform hover:-translate-y-2 transition-all duration-300 cursor-pointer"
       onClick={() => onCardClick(destination)}
     >
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <img
           src={imageUrl}
           alt={title}
-          className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110"
+          className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute top-0 right-0 bg-accent text-white p-2 rounded-bl-lg font-bold">
+        {/* Floating Price Pill */}
+        <div className="absolute top-4 right-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-3.5 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-md border border-white/10">
           ₹{price}
         </div>
       </div>
-      <div className="p-5">
-        <h3 className="text-xl font-bold text-primary text-white">{title}</h3>
-        <p className="text-sm dark:text-gray-500 mb-2">
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors duration-300">{title}</h3>
+        <p className="text-xs text-gray-500 mb-3 flex items-center gap-1 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
           {location}
         </p>
-        <p className="text-dark dark:text-gray-300 text-sm mb-4 line-clamp-2">
+        <p className="text-gray-400 text-sm mb-5 line-clamp-2 leading-relaxed font-light">
           {description}
         </p>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between border-t border-white/5 pt-4">
           <div className="flex items-center">
-            {Array.from({ length: 5 }, (_, i) => (
-              <StarIcon key={i} filled={i < rating} />
-            ))}
-            <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }, (_, i) => (
+                <StarIcon key={i} filled={i < rating} />
+              ))}
+            </div>
+            <span className="text-xs text-gray-400 ml-2 font-medium">
               ({rating}.0)
             </span>
           </div>
-          <span className="text-primary font-semibold hover:underline text-gray-400">
-            View Options →
+          <span className="text-cyan-400 font-semibold text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform duration-300">
+            View Details <span>→</span>
           </span>
         </div>
       </div>

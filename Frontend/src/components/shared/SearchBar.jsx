@@ -1,218 +1,59 @@
-import { useState, useEffect, useRef } from "react";
-import { SearchIcon, CalendarIcon, UsersIcon } from "./Icons";
+import { useState, useEffect } from "react";
+import { SearchIcon } from "./Icons";
 
-// --- GUEST POPUP COMPONENT (CORRECTED) ---
-function GuestPopup({ guests, setGuests, rooms, setRooms, onClose }) {
-  return (
-    <div className="absolute top-full mt-2 w-72 origin-top-right rounded-xl bg-white p-4 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-      <div className="space-y-4">
-        {/* Guests Counter */}
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="font-semibold text-gray-800">Guests</p>
-            <p className="text-sm text-gray-500">Number of adults</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setGuests((prev) => Math.max(1, prev - 1))}
-              disabled={guests <= 1}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-600 transition hover:border-gray-500 disabled:opacity-50"
-            >
-              -
-            </button>
-            {/* FIX: Added text-gray-700 to the number */}
-            <span className="w-4 text-center font-semibold text-gray-700">
-              {guests}
-            </span>
-            <button
-              type="button"
-              onClick={() => setGuests((prev) => prev + 1)}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-600 transition hover:border-gray-500"
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        {/* Rooms Counter */}
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="font-semibold text-gray-800">Rooms</p>
-            <p className="text-sm text-gray-500">Number of rooms</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setRooms((prev) => Math.max(1, prev - 1))}
-              disabled={rooms <= 1}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-600 transition hover:border-gray-500 disabled:opacity-50"
-            >
-              -
-            </button>
-            {/* FIX: Added text-gray-700 to the number */}
-            <span className="w-4 text-center font-semibold text-gray-700">
-              {rooms}
-            </span>
-            <button
-              type="button"
-              onClick={() => setRooms((prev) => prev + 1)}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-600 transition hover:border-gray-500"
-            >
-              +
-            </button>
-          </div>
-        </div>
-      </div>
-      <button
-        onClick={onClose}
-        className="mt-4 w-full rounded-lg bg-blue-600 py-2 text-white font-semibold hover:bg-blue-700 transition"
-      >
-        Done
-      </button>
-    </div>
-  );
-}
-
-// --- MODIFIED SEARCHBAR COMPONENT ---
-export default function SearchBar({ onSearch }) {
-  const [location, setLocation] = useState("");
-  const [date, setDate] = useState("");
-  const [guests, setGuests] = useState(2);
-  const [rooms, setRooms] = useState(1);
-  const [inputType, setInputType] = useState("text");
-  const [searchResult, setSearchResult] = useState("");
-
-  const [isGuestPopupOpen, setIsGuestPopupOpen] = useState(false);
-  const popupRef = useRef(null);
-
-  const handleDateFocus = () => setInputType("date");
-  const handleDateBlur = () => !date && setInputType("text");
+export default function SearchBar({ onSearch, value = "" }) {
+  const [location, setLocation] = useState(value);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setIsGuestPopupOpen(false);
-      }
+    setLocation(value);
+  }, [value]);
+
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setLocation(val);
+    if (onSearch) {
+      onSearch(val);
     }
-    if (isGuestPopupOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isGuestPopupOpen]);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsGuestPopupOpen(false);
-    const searchData = { location, date, guests, rooms };
-    console.log("Searching with:", searchData);
-    
     if (onSearch) {
-      onSearch(searchData);
+      onSearch(location);
     }
-
-    const resultString = `Searching for: Location: ${location}, Date: ${date}, Guests: ${guests}, Rooms: ${rooms}`;
-    setSearchResult(resultString);
-
-    setTimeout(() => setSearchResult(""), 6000);
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4">
-      <div className="bg-white rounded-2xl sm:rounded-full shadow-lg p-2">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row items-center w-full"
-        >
-          {/* Location Section */}
-          <div className="flex-1 w-full cursor-pointer rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200">
-            <label
-              htmlFor="location"
-              className="block text-xs font-bold text-gray-800"
-            >
-              Destination
-            </label>
-            <input
-              type="text"
-              id="location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="Where are you going?"
-              className="w-full bg-transparent focus:outline-none text-sm placeholder-gray-500 text-gray-900 flex justify-center text-center"
-              required
-            />
-          </div>
-
-          <div className="hidden sm:block w-px h-8 bg-gray-200"></div>
-
-          {/* Date Section */}
-          <div className="flex-1 w-full cursor-pointer rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200">
-            <label
-              htmlFor="date"
-              className="block text-xs font-bold text-gray-800"
-            >
-              Date
-            </label>
-            <input
-              type={inputType}
-              id="date"
-              value={date}
-              placeholder="Select trip start date"
-              onFocus={handleDateFocus}
-              onBlur={handleDateBlur}
-              onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-transparent focus:outline-none text-sm placeholder-gray-500 text-gray-900 flex justify-center text-center"
-              required
-            />
-          </div>
-
-          <div className="hidden sm:block w-px h-8 bg-gray-200"></div>
-
-          {/* Guests & Search Button Section */}
-          <div
-            className="relative flex-1 w-full flex items-center justify-between rounded-full hover:bg-gray-100 p-2 sm:p-0 sm:pl-6 transition-colors duration-200"
-            ref={popupRef}
-          >
-            <div
-              onClick={() => setIsGuestPopupOpen(!isGuestPopupOpen)}
-              className="w-full cursor-pointer"
-            >
-              <p className="block text-xs font-bold text-gray-800">
-                Guests & Rooms
-              </p>
-              <p className="text-sm text-gray-500 font-semibold">{`${guests} Guests, ${rooms} Room${
-                rooms > 1 ? "s" : ""
-              }`}</p>
-            </div>
-
-            <button
-              type="submit"
-              className="bg-blue-600 text-white font-bold rounded-full transition-all duration-300 flex items-center justify-center shadow-md hover:bg-blue-700 hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 sm:mr-2"
-              aria-label="Search"
-            >
-              <SearchIcon className="w-5 h-5" />
-            </button>
-
-            {isGuestPopupOpen && (
-              <GuestPopup
-                guests={guests}
-                setGuests={setGuests}
-                rooms={rooms}
-                setRooms={setRooms}
-                onClose={() => setIsGuestPopupOpen(false)}
-              />
-            )}
-          </div>
-        </form>
-      </div>
-
-      {searchResult && (
-        <div className="mt-4 p-3 bg-green-100 text-green-800 rounded-lg text-center shadow-md transition-opacity duration-300">
-          {searchResult}
+    <div className="w-full max-w-2xl mx-auto px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center bg-black/40 backdrop-blur-xl border border-white/10 dark:border-gray-800 rounded-full shadow-2xl p-1.5 focus-within:border-cyan-500/50 focus-within:ring-2 focus-within:ring-cyan-500/20 transition-all duration-300"
+      >
+        {/* Search Icon */}
+        <div className="pl-4 text-cyan-400 flex items-center justify-center">
+          <SearchIcon className="w-5 h-5" />
         </div>
-      )}
+
+        {/* Input Field */}
+        <input
+          type="text"
+          id="location-search"
+          value={location}
+          onChange={handleChange}
+          placeholder="Where to? (e.g., Goa, Manali, Kerala...)"
+          className="flex-grow bg-transparent text-white placeholder-gray-400 pl-3 pr-4 py-3 text-base focus:outline-none"
+          autoComplete="off"
+        />
+
+        {/* Search Button */}
+        <button
+          type="submit"
+          className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-500/10 active:scale-95 flex items-center gap-2 cursor-pointer text-sm md:text-base flex-shrink-0"
+        >
+          <span>Search</span>
+        </button>
+      </form>
     </div>
   );
 }
+
