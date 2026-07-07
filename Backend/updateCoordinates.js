@@ -21,7 +21,7 @@ const updateCoordinates = async () => {
 
         for (const destination of destinations) {
             if (!destination.coordinates || destination.coordinates.length < 2) {
-                const query = `${destination.name}, ${destination.city}, ${destination.state}`;
+                const query = `${destination.name}, ${destination.city}, ${destination.state}, India`;
                 const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${mapboxToken}&limit=1`;
                 
                 try {
@@ -35,7 +35,7 @@ const updateCoordinates = async () => {
                             { _id: destination._id },
                             { $set: { coordinates: center } }
                         );
-                        console.log(`Updated coordinates for ${destination.name}`);
+                        console.log(`Updated coordinates for ${destination.name} to ${JSON.stringify(center)}`);
                         updatedCount++;
                     } else {
                         console.log(`No coordinates found for ${destination.name}`);
