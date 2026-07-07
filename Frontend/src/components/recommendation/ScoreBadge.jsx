@@ -12,20 +12,20 @@ export default function ScoreBadge({ score }) {
     const strokeDashoffset = circumference - (score / 100) * circumference;
 
     // Define colors based on score value
-    let colorClass = 'text-sky-400';
-    let ringColorClass = 'stroke-sky-400';
-    let bgRingClass = 'stroke-gray-700';
+    let colorClass = 'text-sky-600 dark:text-sky-400';
+    let ringColorClass = 'stroke-sky-600 dark:stroke-sky-400';
+    let bgRingClass = 'stroke-gray-200 dark:stroke-gray-700';
 
     if (score >= 80) {
-        colorClass = 'text-emerald-400';
-        ringColorClass = 'stroke-emerald-400';
+        colorClass = 'text-emerald-600 dark:text-emerald-400';
+        ringColorClass = 'stroke-emerald-600 dark:stroke-emerald-400';
     } else if (score >= 50) {
-        colorClass = 'text-amber-400';
-        ringColorClass = 'stroke-amber-400';
+        colorClass = 'text-amber-600 dark:text-amber-400';
+        ringColorClass = 'stroke-amber-600 dark:stroke-amber-400';
     }
 
     return (
-        <div className="flex items-center gap-3 bg-gray-900/60 rounded-full pl-2 pr-4 py-1.5 border border-gray-800/80 shadow-inner">
+        <div className="flex items-center gap-3 bg-gray-100/80 dark:bg-gray-900/60 rounded-full pl-2 pr-4 py-1.5 border border-gray-200 dark:border-gray-800/80 shadow-inner">
             <div className="relative flex items-center justify-center w-14 h-14">
                 <svg className="w-full h-full transform -rotate-95">
                     {/* Background Circle */}
@@ -50,12 +50,12 @@ export default function ScoreBadge({ score }) {
                         fill="transparent"
                     />
                 </svg>
-                <div className="absolute font-black text-xs text-white">
+                <div className="absolute font-black text-xs text-gray-900 dark:text-white">
                     {score}%
                 </div>
             </div>
             <div className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">
+                <span className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 font-bold">
                     Compatibility
                 </span>
                 <span className={`text-xs font-black leading-tight ${colorClass}`}>

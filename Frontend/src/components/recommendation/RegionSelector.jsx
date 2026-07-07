@@ -15,7 +15,7 @@ const REGIONS = [
 export default function RegionSelector({ value, onChange }) {
     return (
         <div className="space-y-3">
-            <label className="block text-sm font-semibold text-gray-300">
+            <label className="block text-sm font-semibold text-gray-800 dark:text-gray-300">
                 Preferred Region
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-2 xl:grid-cols-3 gap-3">
@@ -28,12 +28,14 @@ export default function RegionSelector({ value, onChange }) {
                             onClick={() => onChange(region.id)}
                             className={`flex flex-col p-3 text-center justify-center items-center rounded-xl border transition-all duration-200 last:col-span-2 sm:last:col-span-1 lg:last:col-span-2 xl:last:col-span-1 ${
                                 isSelected
-                                    ? 'bg-cyan-500/20 border-cyan-400 text-white shadow-md shadow-cyan-500/5'
-                                    : 'bg-gray-800/40 border-gray-700/60 text-gray-400 hover:border-gray-600/80 hover:text-white'
+                                    ? 'bg-cyan-50 dark:bg-cyan-500/20 border-cyan-400 text-cyan-700 dark:text-white shadow-md shadow-cyan-500/5'
+                                    : 'bg-white dark:bg-gray-800/40 border-gray-200 dark:border-gray-700/60 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600/80 hover:text-gray-900 dark:hover:text-white'
                             }`}
                         >
                             <span className="font-bold text-xs mb-1">{region.label}</span>
-                            <span className="text-[10px] text-gray-500 leading-tight hidden sm:block">
+                            <span className={`text-[10px] leading-tight hidden sm:block ${
+                                isSelected ? 'text-cyan-600 dark:text-cyan-200' : 'text-gray-500 dark:text-gray-400'
+                            }`}>
                                 {region.desc}
                             </span>
                         </button>

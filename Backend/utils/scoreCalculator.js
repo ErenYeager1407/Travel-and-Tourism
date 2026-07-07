@@ -100,16 +100,67 @@ export const normalizeTravelGroup = (group) => {
     return group;
 };
 
+
 /**
- * Retrieves the budget of the destination, preferring estimatedTripCost over basePrice.
+ * Retrieves the estimated budget of the destination.
+ * Formula:
+ * Total Budget = (Destination Budget × Days) + (Budget Category Cost × Days)
+ *
+ * Destination Budget:
+ * - Uses estimatedTripCost if available
+ * - Otherwise falls back to basePrice
+ *
+ * Budget Category Cost (per day):
+ * - Low    : ₹2000
+ * - Medium : ₹3500
+ * - High   : ₹5000
+ *
  * @param {object} destination - Mongoose destination document.
- * @returns {number} The budget cost.
+ * @param {object} [preferences] - User travel preferences.
+ * @returns {number} Estimated total trip cost.
  */
-export const getDestinationBudget = (destination) => {
-    if (destination.estimatedTripCost && destination.estimatedTripCost > 0) {
-        return destination.estimatedTripCost;
+export const getDestinationBudget = (destination, preferences = {}) => {
+    const duration =
+        Number(preferences?.duration) || 1;
+
+    // Daily allowance based on budget category
+    let budgetAllowancePerDay = 3500;
+
+    switch (destination.budgetCategory) {
+        case 'Low':
+            budgetAllowancePerDay = 2000;
+            break;
+
+        case 'High':
+            budgetAllowancePerDay = 5000;
+            break;
+
+        case 'Medium':
+        default:
+            budgetAllowancePerDay = 3500;
+            break;
     }
-    return destination.basePrice || 0;
+
+    // Get destination daily base rate
+    // If estimatedTripCost exists, it represents a total cost for tripDuration days (flights + hotels + allowance).
+    // We subtract the total allowance to isolate flight + hotel base, then divide by tripDuration to get the daily rate.
+    let baseDailyRate = 0;
+    if (destination.estimatedTripCost && destination.estimatedTripCost > 0) {
+        const tripDuration = destination.tripDuration || 3;
+        const totalAllowance = budgetAllowancePerDay * tripDuration;
+        const remainingBase = Math.max(0, destination.estimatedTripCost - totalAllowance);
+        baseDailyRate = remainingBase / tripDuration;
+    } else {
+        baseDailyRate = Number(destination.basePrice) || 0;
+    }
+
+    // Formula:
+    // (Destination Budget × Days) + (Budget Category Cost × Days)
+    const totalBudget =
+        (baseDailyRate * duration) +
+        (budgetAllowancePerDay * duration);
+
+    return totalBudget;
 };
 
 /**

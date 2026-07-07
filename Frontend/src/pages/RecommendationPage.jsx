@@ -55,15 +55,15 @@ export default function RecommendationPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 text-gray-100 py-8 sm:py-16">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-8 sm:py-16 transition-colors duration-200">
             <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
                 
                 {/* Page Title Header */}
                 <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-                    <h1 className="text-4xl md:text-5xl font-black mb-4">
-                        Find Your Perfect <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Offbeat Trail</span>
+                    <h1 className="text-4xl md:text-5xl font-black mb-4 text-gray-900 dark:text-white">
+                        Find Your Perfect <span className="bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">Offbeat Trail</span>
                     </h1>
-                    <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed">
                         Input your preferences and let our rule-based matching engine recommend the best hidden gems in India custom-tailored to your budget, time, and style.
                     </p>
                 </div>
@@ -72,12 +72,12 @@ export default function RecommendationPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                     
                     {/* Left Column: Questionnaire (Form) */}
-                    <div className="lg:col-span-5 bg-gray-900 border border-gray-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-6">
-                        <div className="border-b border-gray-800 pb-4">
-                            <h2 className="text-lg font-extrabold text-white flex items-center gap-2">
+                    <div className="lg:col-span-5 bg-white dark:bg-gray-800/40 border border-gray-200 dark:border-gray-850 rounded-2xl p-4 sm:p-6 shadow-xl space-y-6">
+                        <div className="border-b border-gray-200 dark:border-gray-800 pb-4">
+                            <h2 className="text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                                 🧭 Preferences Questionnaire
                             </h2>
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                 Customize your criteria to find exact matches
                             </p>
                         </div>
@@ -95,13 +95,13 @@ export default function RecommendationPage() {
                     {/* Right Column: Matched Outputs */}
                     <div 
                         id="recommendation-results" 
-                        className="lg:col-span-7 bg-gray-900 border border-gray-800 rounded-2xl p-4 sm:p-6 min-h-[600px] shadow-xl flex flex-col"
+                        className="lg:col-span-7 bg-white dark:bg-gray-800/40 border border-gray-200 dark:border-gray-850 rounded-2xl p-4 sm:p-6 min-h-[600px] shadow-xl flex flex-col"
                     >
-                        <div className="border-b border-gray-800 pb-4 mb-6">
-                            <h2 className="text-lg font-extrabold text-white flex items-center gap-2">
+                        <div className="border-b border-gray-200 dark:border-gray-800 pb-4 mb-6">
+                            <h2 className="text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                                 ✨ Matched Destinations
                             </h2>
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                 High compatibility hidden gems sorted by matching score
                             </p>
                         </div>
@@ -112,13 +112,13 @@ export default function RecommendationPage() {
                         {/* Idle/Intro State */}
                         {!loading && !hasSearched && (
                             <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
-                                <div className="p-4 bg-gray-800/40 rounded-full border border-gray-700 mb-6 text-cyan-400 animate-bounce">
+                                <div className="p-4 bg-cyan-50 dark:bg-gray-850 rounded-full border border-cyan-100 dark:border-gray-700 mb-6 text-cyan-600 dark:text-cyan-400 animate-bounce">
                                     <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <h3 className="text-lg font-bold text-white mb-2">Ready to explore?</h3>
-                                <p className="text-sm text-gray-400 max-w-sm">
+                                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Ready to explore?</h3>
+                                <p className="text-sm text-gray-600 dark:text-gray-400 max-w-sm">
                                     Select your criteria on the left and click <strong>Find Destinations</strong> to run the matching engine.
                                 </p>
                             </div>
@@ -132,7 +132,7 @@ export default function RecommendationPage() {
                                 </div>
                             ) : (
                                 <div className="flex-1 space-y-6">
-                                    <div className="flex items-center justify-between text-xs text-gray-400 font-semibold px-1">
+                                    <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 font-semibold px-1">
                                         <span>Showing {recommendations.length} compatible matches</span>
                                         <span>Highest score: {recommendations[0]?.score}%</span>
                                     </div>

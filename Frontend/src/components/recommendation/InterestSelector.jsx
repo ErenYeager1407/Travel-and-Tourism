@@ -92,7 +92,7 @@ const INTERESTS = [
 export default function InterestSelector({ value, onChange }) {
     return (
         <div className="space-y-3">
-            <label className="block text-sm font-semibold text-gray-300">
+            <label className="block text-sm font-semibold text-gray-800 dark:text-gray-300">
                 Core Travel Interest
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -106,17 +106,17 @@ export default function InterestSelector({ value, onChange }) {
                             className={`flex flex-col text-left p-4 rounded-xl border transition-all duration-300 ${
                                 isSelected
                                     ? 'bg-gradient-to-br from-cyan-600 to-blue-700 border-cyan-400 text-white shadow-lg shadow-cyan-500/10 scale-[1.02]'
-                                    : 'bg-gray-800/40 border-gray-700/60 text-gray-300 hover:border-gray-600/80 hover:bg-gray-800/60'
+                                    : 'bg-white dark:bg-gray-800/40 border-gray-200 dark:border-gray-700/60 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600/80 hover:bg-gray-50 dark:hover:bg-gray-800/60'
                             }`}
                         >
                             <div className={`p-2 rounded-lg w-fit mb-3 ${
-                                isSelected ? 'bg-white/20 text-white' : 'bg-gray-700 text-cyan-400'
+                                isSelected ? 'bg-white/20 text-white' : 'bg-cyan-50 dark:bg-gray-700 text-cyan-600 dark:text-cyan-400'
                             }`}>
                                 {item.icon}
                             </div>
                             <span className="font-bold text-sm mb-1">{item.label}</span>
                             <span className={`text-[11px] leading-relaxed hidden sm:block ${
-                                isSelected ? 'text-cyan-100' : 'text-gray-400'
+                                isSelected ? 'text-cyan-100' : 'text-gray-500 dark:text-gray-400'
                             }`}>
                                 {item.description}
                             </span>

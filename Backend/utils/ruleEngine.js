@@ -18,17 +18,8 @@ export const hardFilters = [
         name: 'Budget Limit',
         evaluate: (destination, preferences) => {
             if (preferences.budget === undefined || preferences.budget === null) return true;
-            const destCost = getDestinationBudget(destination);
+            const destCost = getDestinationBudget(destination, preferences);
             return destCost <= preferences.budget;
-        }
-    },
-    {
-        name: 'Duration Limit',
-        evaluate: (destination, preferences) => {
-            if (preferences.duration === undefined || preferences.duration === null) return true;
-            // Use tripDuration as recommendedDuration
-            const duration = destination.tripDuration || 0;
-            return duration <= preferences.duration;
         }
     },
     {

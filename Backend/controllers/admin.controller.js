@@ -42,11 +42,11 @@ const recalculateDestinationCost = async (destinationId) => {
 
         const tripDuration = destination.tripDuration || 3;
         
-        let budgetAllowance = 3500; // Medium default
-        if (destination.budgetCategory === 'Low') budgetAllowance = 2000;
-        else if (destination.budgetCategory === 'High') budgetAllowance = 5000;
+        let budgetAllowancePerDay = 3500; // Medium default
+        if (destination.budgetCategory === 'Low') budgetAllowancePerDay = 2000;
+        else if (destination.budgetCategory === 'High') budgetAllowancePerDay = 5000;
 
-        const estimatedTripCost = (minFlightPrice * 2) + (minHotelPrice * tripDuration) + budgetAllowance;
+        const estimatedTripCost = (minFlightPrice * 2) + (minHotelPrice * tripDuration) + (budgetAllowancePerDay * tripDuration);
 
         destination.estimatedTripCost = estimatedTripCost;
         await destination.save();

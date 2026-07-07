@@ -6,10 +6,10 @@ import React from 'react';
  */
 export default function EmptyState({ onReset }) {
     return (
-        <div className="flex flex-col items-center justify-center text-center p-8 bg-gray-800/25 border border-dashed border-gray-700 rounded-2xl max-w-md mx-auto my-12 shadow-sm animate-fade-in">
+        <div className="flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-gray-800/25 border border-dashed border-gray-300 dark:border-gray-700 rounded-2xl max-w-md mx-auto my-12 shadow-sm animate-fade-in">
             {/* SVG Compass Illustration */}
             <svg
-                className="w-24 h-24 text-gray-500 mb-6 animate-pulse"
+                className="w-24 h-24 text-gray-450 dark:text-gray-500 mb-6 animate-pulse"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -23,13 +23,13 @@ export default function EmptyState({ onReset }) {
                 <circle cx="12" cy="11" r="3" strokeWidth={1.5} />
             </svg>
             
-            <h3 className="text-xl font-bold text-white mb-2">No Matching Destinations</h3>
-            <p className="text-sm text-gray-400 mb-6 leading-relaxed">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No Matching Destinations</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
                 We couldn't find any offbeat trails matching your exact filters. Your strict budget, trip duration, or group suitability might be too restrictive.
             </p>
             
-            <div className="text-left w-full bg-gray-900/40 border border-gray-800 rounded-xl p-4 mb-6 space-y-2 text-xs text-gray-400">
-                <p className="font-bold text-gray-300">💡 Suggestions to get matches:</p>
+            <div className="text-left w-full bg-gray-50 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-850 rounded-xl p-4 mb-6 space-y-2 text-xs text-gray-650 dark:text-gray-400">
+                <p className="font-bold text-gray-800 dark:text-gray-300">💡 Suggestions to get matches:</p>
                 <ul className="list-disc pl-4 space-y-1">
                     <li>Increase your maximum budget limit</li>
                     <li>Add 1-2 extra travel days</li>

@@ -55,7 +55,7 @@ const SEASONS = [
 export default function SeasonSelector({ value, onChange }) {
     return (
         <div className="space-y-3">
-            <label className="block text-sm font-semibold text-gray-300">
+            <label className="block text-sm font-semibold text-gray-800 dark:text-gray-300">
                 Travel Season
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-2 xl:grid-cols-3 gap-3">
@@ -69,10 +69,10 @@ export default function SeasonSelector({ value, onChange }) {
                             className={`flex items-center justify-center gap-2 py-2 px-3 rounded-xl border transition-all duration-200 text-xs font-semibold last:col-span-2 sm:last:col-span-1 lg:last:col-span-2 xl:last:col-span-1 ${
                                 isSelected
                                     ? 'bg-cyan-500 border-cyan-500 text-white shadow-md'
-                                    : 'bg-gray-800/40 border-gray-700/60 text-gray-400 hover:border-gray-600 hover:text-white'
+                                    : 'bg-white dark:bg-gray-800/40 border-gray-200 dark:border-gray-700/60 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-white'
                             }`}
                         >
-                            <span className={isSelected ? 'text-white' : 'text-cyan-400'}>
+                            <span className={isSelected ? 'text-white' : 'text-cyan-600 dark:text-cyan-400'}>
                                 {season.icon}
                             </span>
                             {season.label}

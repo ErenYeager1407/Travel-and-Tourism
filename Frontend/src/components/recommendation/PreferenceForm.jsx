@@ -78,7 +78,7 @@ export default function PreferenceForm({
 
             {/* Validation/API error display */}
             {error && (
-                <div className="p-4 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-xl text-xs font-semibold animate-shake">
+                <div className="p-4 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-rose-600 dark:text-rose-400 rounded-xl text-xs font-semibold animate-shake">
                     ⚠️ {error}
                 </div>
             )}
@@ -108,7 +108,7 @@ export default function PreferenceForm({
                     type="button"
                     onClick={onReset}
                     disabled={loading}
-                    className="w-full sm:w-auto px-5 py-3 border border-gray-700 hover:border-gray-500 bg-gray-900/60 hover:bg-gray-800 disabled:opacity-50 text-gray-300 font-bold text-xs rounded-xl transition-all"
+                    className="w-full sm:w-auto px-5 py-3 border border-gray-300 dark:border-gray-700 hover:border-gray-450 dark:hover:border-gray-500 bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 text-gray-600 dark:text-gray-300 font-bold text-xs rounded-xl transition-all"
                 >
                     Reset Form
                 </button>

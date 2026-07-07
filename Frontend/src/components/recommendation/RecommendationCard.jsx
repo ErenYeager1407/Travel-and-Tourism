@@ -19,7 +19,7 @@ export default function RecommendationCard({ destination, onViewDetails, onBookN
     const duration = destination.tripDuration || 2;
 
     return (
-        <div className="bg-gray-800/40 border border-gray-700/60 rounded-2xl overflow-hidden hover:border-cyan-500/50 shadow-md hover:shadow-cyan-500/5 transition-all duration-300 flex flex-col sm:flex-row gap-4 p-4">
+        <div className="bg-white dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700/60 rounded-2xl overflow-hidden hover:border-cyan-500/50 shadow-md hover:shadow-cyan-500/5 transition-all duration-300 flex flex-col sm:flex-row gap-4 p-4">
             
             {/* Image Section */}
             <div className="w-full sm:w-48 h-48 sm:h-auto relative rounded-xl overflow-hidden flex-shrink-0 group">
@@ -29,7 +29,7 @@ export default function RecommendationCard({ destination, onViewDetails, onBookN
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-transparent"></div>
-                <div className="absolute bottom-3 left-3 bg-cyan-950/80 backdrop-blur-sm border border-cyan-500/30 text-cyan-300 font-extrabold text-xs px-2.5 py-1 rounded-lg">
+                <div className="absolute bottom-3 left-3 bg-cyan-50/90 dark:bg-cyan-955/80 backdrop-blur-sm border border-cyan-200 dark:border-cyan-500/30 text-cyan-700 dark:text-cyan-300 font-extrabold text-xs px-2.5 py-1 rounded-lg">
                     ₹{budget.toLocaleString('en-IN')}
                 </div>
             </div>
@@ -40,10 +40,10 @@ export default function RecommendationCard({ destination, onViewDetails, onBookN
                     {/* Header: Name and Compatibility */}
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-2">
                         <div>
-                            <h3 className="text-xl font-extrabold text-white leading-tight">
+                            <h3 className="text-xl font-extrabold text-gray-900 dark:text-white leading-tight">
                                 {title}
                             </h3>
-                            <span className="text-xs text-gray-400 font-medium">
+                            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
                                 {location}
                             </span>
                         </div>
@@ -53,7 +53,7 @@ export default function RecommendationCard({ destination, onViewDetails, onBookN
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm text-gray-300 leading-relaxed line-clamp-3 mb-4">
+                    <p className="text-sm text-gray-650 dark:text-gray-300 leading-relaxed line-clamp-3 mb-4">
                         {destination.description}
                     </p>
                 </div>
@@ -77,7 +77,7 @@ export default function RecommendationCard({ destination, onViewDetails, onBookN
                         <button
                             type="button"
                             onClick={() => onViewDetails(destination)}
-                            className="w-full sm:flex-1 lg:w-full xl:flex-1 px-4 py-2.5 border border-gray-700 bg-gray-900/60 hover:bg-gray-800 hover:text-white text-gray-300 font-bold text-xs rounded-xl transition-all duration-200"
+                            className="w-full sm:flex-1 lg:w-full xl:flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white text-gray-700 dark:text-gray-300 font-bold text-xs rounded-xl transition-all duration-200"
                         >
                             View Details
                         </button>

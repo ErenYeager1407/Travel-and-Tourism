@@ -5,7 +5,7 @@
 
 import Destination from '../models/Destination.js';
 import { hardFilters, scoringRules } from '../utils/ruleEngine.js';
-import { calculateScore } from '../utils/scoreCalculator.js';
+import { calculateScore, getDestinationBudget } from '../utils/scoreCalculator.js';
 
 /**
  * Gets rule-based recommendations for a user based on preferences.
@@ -61,7 +61,7 @@ export const getRecommendations = async (preferences, threshold = 40) => {
             description: dest.description,
             images: dest.images,
             coordinates: dest.coordinates,
-            estimatedTripCost: dest.estimatedTripCost || dest.basePrice,
+            estimatedTripCost: getDestinationBudget(dest, preferences),
             tripDuration: dest.tripDuration,
             bestSeasons: dest.bestSeasons,
             crowdLevel: dest.crowdLevel,
