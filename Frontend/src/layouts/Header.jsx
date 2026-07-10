@@ -39,6 +39,13 @@ function UserDropdown({ user, onLogout }) {
               {user.email}
             </p>
           </div>
+          <Link
+            to="/profile"
+            onClick={() => setIsOpen(false)}
+            className="block w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border-b dark:border-gray-700 transition-colors"
+          >
+            💼 My Bookings
+          </Link>
           <button
             onClick={async () => {
               setIsOpen(false);
