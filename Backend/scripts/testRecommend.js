@@ -11,15 +11,7 @@ const testRecommendationAPI = async () => {
     // activities: ["Water Sports", "Religious", "Shopping"], bestSeasons: ["Spring", "Monsoon"],
     // suitableFor: ["Family", "Solo", "Couple", "Friends"], crowdLevel: "Medium", offbeatScore: 74
     const payload = {
-        budget: 10000,
-        duration: 5,
-        interest: "Water Sports",
-        season: "Spring",
-        region: "North",
-        crowd: "Medium",
-        adventure: "High", // Water sports maps to High adventure!
-        group: "Solo",
-        threshold: 20 // Lower threshold for testing
+        threshold: 0
     };
 
     console.log('Sending preference payload to recommendation API...');

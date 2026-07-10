@@ -66,7 +66,11 @@ export const getRecommendations = async (preferences, threshold = 40) => {
             bestSeasons: dest.bestSeasons,
             crowdLevel: dest.crowdLevel,
             score,
-            matchedRules: formattedMatchedRules
+            matchedRules: formattedMatchedRules,
+            hotels: dest.hotels,
+            flights: dest.flights,
+            rating: dest.rating,
+            basePrice: dest.basePrice
         };
     });
 
